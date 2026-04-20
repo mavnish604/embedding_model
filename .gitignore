@@ -1,0 +1,9 @@
+venv/
+.hf_cache/
+checkpoints/
+clip_checkpoints/
+data/
+*.pt
+__pycache__/
+.ipynb_checkpoints/
+*.ipynb
