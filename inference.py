@@ -33,12 +33,14 @@ def resolve_default_checkpoint():
     clip_latest = Path(__file__).resolve().parent / "clip_checkpoints" / "latest_checkpoint.json"
     if clip_latest.exists():
         clip_metadata = json.loads(clip_latest.read_text(encoding="utf-8"))
-        return Path(clip_metadata["latest_checkpoint"])
+        # Use only the filename so it works when deployed in a different directory structure
+        return clip_latest.parent / Path(clip_metadata["latest_checkpoint"]).name
 
     text_latest = DEFAULT_CHECKPOINT_DIR / "latest_checkpoint.json"
     if text_latest.exists():
         text_metadata = json.loads(text_latest.read_text(encoding="utf-8"))
-        return Path(text_metadata["latest_checkpoint"])
+        # Use only the filename 
+        return text_latest.parent / Path(text_metadata["latest_checkpoint"]).name
 
     return DEFAULT_CHECKPOINT_DIR / "mini_transformer_epoch_3.pt"
 
